@@ -1,6 +1,6 @@
 # Current Feature
 
-## Feature: 1.1 — Monorepo Scaffold
+## Feature: 1.2 — Backend: Express + Prisma Setup
 
 ## Status
 
@@ -8,15 +8,17 @@ In Progress
 
 ## Goals
 
-- Create the Turborepo monorepo root and shared packages
-- No apps scaffolded yet — only root config and `packages/`
-- `pnpm install` succeeds at root
-- No TypeScript errors in `packages/`
+- Scaffold production-ready Express + TypeScript + Prisma backend in `apps/api`
+- Validate all env vars at startup with Zod
+- `GET /api/health` returns `{ status: "ok", timestamp: "..." }`
+- All config modules (Prisma, R2, Stripe, Resend) import without throwing
 
 ## Notes
 
-- Using pnpm workspaces with Turborepo
-- Three tsconfig presets: base, nextjs, react-native
-- `packages/shared` is the shared utilities package
+- Package name: `@seednest/api`
+- Uses `tsx` for dev, `tsup` for build
+- Auth middleware stubs only — full implementation in Spec 1.5
 
 ## History
+
+- **1.1 — Monorepo Scaffold** ✅ — Turborepo + pnpm workspaces, `packages/tsconfig` (base/nextjs/react-native), `@seednest/shared`. Merged to main 2026-04-20.
