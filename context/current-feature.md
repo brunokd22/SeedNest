@@ -1,23 +1,22 @@
 # Current Feature
 
-## Feature: 1.2 — Backend: Express + Prisma Setup
+## Feature: 1.3 — Database Schema (Prisma)
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- Scaffold production-ready Express + TypeScript + Prisma backend in `apps/api`
-- Validate all env vars at startup with Zod
-- `GET /api/health` returns `{ status: "ok", timestamp: "..." }`
-- All config modules (Prisma, R2, Stripe, Resend) import without throwing
+- Create the complete Prisma schema for SeedNest
+- Write seed script with admin, manager, nursery, categories, and seedlings
+- Run `prisma migrate dev` and `prisma db seed` successfully
 
 ## Notes
 
-- Package name: `@seednest/api`
-- Uses `tsx` for dev, `tsup` for build
-- Auth middleware stubs only — full implementation in Spec 1.5
+- Schema lives at `apps/api/prisma/schema.prisma`
+- Uses Neon (PostgreSQL) — project `devstash`, branch `development`
+- Seed uses `bcryptjs` for password hashing
 
 ## History
 

@@ -38,6 +38,9 @@
     "@types/cors": "^2.8.17",
     "@types/morgan": "^1.9.9"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "devDependencies": {
     "tsx": "^4.19.3",
     "tsup": "^8.4.0",
