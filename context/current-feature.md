@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -22,3 +22,4 @@ In Progress
 
 - **1.1 — Monorepo Scaffold** ✅ — Turborepo + pnpm workspaces, `packages/tsconfig` (base/nextjs/react-native), `@seednest/shared`. Merged to main 2026-04-20.
 - **1.2 — Backend: Express + Prisma Setup** ✅ — `@seednest/api` with Express, Zod env validation, Prisma singleton, R2/Stripe/Resend config, error handler, validate middleware, auth stubs, haversine util, and `GET /api/health`. Merged to main 2026-04-20.
+- **1.3 — Database Schema (Prisma)** ✅ — Full Prisma schema (12 models, 9 enums), seed script with admin/manager/nursery/categories/seedlings. Applied to Neon via `db push`, seeded successfully. Merged to main 2026-04-28.
