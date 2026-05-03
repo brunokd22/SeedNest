@@ -14,6 +14,8 @@ const envSchema = z.object({
   R2_BUCKET_NAME: z.string().min(1),
   R2_PUBLIC_URL: z.string().url(),
   FRONTEND_URL: z.string().url(),
+  GOOGLE_CLIENT_ID: z.string().optional(),
+  GOOGLE_CLIENT_SECRET: z.string().optional(),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.coerce.number().default(4000),
 });
