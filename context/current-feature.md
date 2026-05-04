@@ -1,25 +1,26 @@
 # Current Feature
 
-## Feature: 1.10 — Customer Nav Layout (Web)
+## Feature: 2.1 — Backend: Nursery CRUD API
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- Sticky top `CustomerNav` with desktop links (Explore, My Orders, My Issues) and mobile Sheet hamburger
-- `CartBadge` inline component reads `totalItems()` from Zustand cart store, links to `/cart`
-- `cart-store.ts`: Zustand + persist middleware (localStorage key `'seednest-cart'`), `addItem` merges duplicates by seedlingId
-- `(customer)/layout.tsx`: Server component role guard redirecting non-CUSTOMER to `/dashboard`
-- `UserMenu` in customer nav: My Orders, My Issues, Sign Out → `/sign-in`
+- `nursery.service.ts`: getAllNurseries, getNurseryById, createNursery, updateNursery, deleteNursery (soft), getNurseriesForExplore (haversine sort)
+- `routes/nursery.ts`: manager CRUD + public /explore and /:id/public routes
+- Register router at `/api/nurseries` in `app.ts`
+- Add `AppError`, `NotFoundError`, `ForbiddenError` classes to `errorHandler.ts`
+- Update `NurseryWithDistance` in shared to have `distanceKm?: number` (optional)
 
 ## Notes
 
-- Zustand must be installed (`pnpm add zustand` in apps/web)
-- `store/` directory lives at `apps/web/src/store/`
-- Customer layout is server component for role guard; CustomerNav is client component
-- `addItem` must merge quantities when the same `seedlingId` is added again
+- `/explore` must be registered before `/:id` in the router to avoid param swallowing
+- Soft delete: set `isActive = false`, no hard delete
+- `haversine(lat1, lon1, lat2, lon2)` util already exists in `apps/api/src/utils/haversine.ts`
+- `validate` middleware from `apps/api/src/middleware/validate.ts` used for body validation
+- `express.json()` is in `app.ts` — nursery router must be registered after it
 
 ## History
 
