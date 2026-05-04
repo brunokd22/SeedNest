@@ -1,7 +1,8 @@
 'use client';
 
-import { LogOut } from 'lucide-react';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { useRouter } from 'next/navigation';
+import { LogOut, User } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -14,6 +15,7 @@ import {
 import { authClient } from '@/lib/auth-client';
 
 export function UserMenu() {
+  const router = useRouter();
   const { data: session } = authClient.useSession();
 
   if (!session?.user) return null;
@@ -25,11 +27,19 @@ export function UserMenu() {
     .toUpperCase()
     .slice(0, 2);
 
+  const handleSignOut = async () => {
+    await authClient.signOut();
+    router.push('/sign-in');
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-9 w-9 rounded-full p-0">
           <Avatar className="h-9 w-9">
+            {session.user.image && (
+              <AvatarImage src={session.user.image} alt={session.user.name} />
+            )}
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
         </Button>
@@ -40,10 +50,12 @@ export function UserMenu() {
           <p className="text-xs text-muted-foreground">{session.user.email}</p>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => authClient.signOut()}
-          className="cursor-pointer"
-        >
+        <DropdownMenuItem className="cursor-pointer">
+          <User className="mr-2 h-4 w-4" />
+          Profile
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
           Sign out
         </DropdownMenuItem>
