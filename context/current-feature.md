@@ -1,26 +1,25 @@
 # Current Feature
 
-## Feature: 1.9 — Manager Sidebar Layout (Web)
+## Feature: 1.10 — Customer Nav Layout (Web)
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- Collapsible Manager dashboard sidebar: 256px expanded / 64px icon-only, persisted to localStorage
-- Mobile: Sheet/drawer toggled from header menu button
-- `ManagerSidebar.tsx`: 6 nav items with lucide icons, active route highlighting, tooltips when collapsed
-- `ManagerShell.tsx`: Client component shell managing collapse state + header bar (page title, NotificationBell, UserMenu)
-- `(manager)/layout.tsx`: Server component with role guard (redirect non-MANAGER to /explore)
-- `UserMenu.tsx`: Sign Out calls `authClient.signOut()` then redirects to `/sign-in`
+- Sticky top `CustomerNav` with desktop links (Explore, My Orders, My Issues) and mobile Sheet hamburger
+- `CartBadge` inline component reads `totalItems()` from Zustand cart store, links to `/cart`
+- `cart-store.ts`: Zustand + persist middleware (localStorage key `'seednest-cart'`), `addItem` merges duplicates by seedlingId
+- `(customer)/layout.tsx`: Server component role guard redirecting non-CUSTOMER to `/dashboard`
+- `UserMenu` in customer nav: My Orders, My Issues, Sign Out → `/sign-in`
 
 ## Notes
 
-- `(manager)/layout.tsx` is a server component; collapse state lives in `ManagerShell.tsx` (client)
-- Tooltip requires shadcn `tooltip` component (installs `@radix-ui/react-tooltip`)
-- Middleware already guards routes; layout guard is defense-in-depth
-- `headers()` used in layout to forward cookie header to backend session check
+- Zustand must be installed (`pnpm add zustand` in apps/web)
+- `store/` directory lives at `apps/web/src/store/`
+- Customer layout is server component for role guard; CustomerNav is client component
+- `addItem` must merge quantities when the same `seedlingId` is added again
 
 ## History
 
