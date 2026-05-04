@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -24,6 +24,7 @@ In Progress
 
 ## History
 
+- **2.3 — Backend: Seedling CRUD API + Low-Stock Notifications** ✅ — Updated shared seedling schema (min/max/trim/defaults). notification.service.ts stub. seedling.service.ts (6 functions incl. paginated filter query + checkAndNotifyLowStock with try/catch guard). sendLowStockAlert HTML email in resend.ts. Nursery-scoped router + globalSeedlingRouter (/api/seedlings/search with haversine sort). Zero TS errors.
 - **2.2 — Backend: Category CRUD API** ✅ — createCategorySchema/updateCategorySchema in shared. checkNurseryOwnership middleware (reads nurseryId param, verifies ownership, attaches req.nursery). category.service.ts (getCategoriesByNursery, createCategory, updateCategory, deleteCategory with seedling guard). Routes at /api/nurseries/:nurseryId/categories with mergeParams. Zero TS errors.
 - **2.1 — Backend: Nursery CRUD API** ✅ — nursery.service.ts (6 functions incl. haversine geo-sort), routes/nursery.ts (public /explore + /:id/public, manager CRUD), registered at /api/nurseries. AppError/NotFoundError/ForbiddenError added to errorHandler. NurseryWithDistance.distanceKm made optional. Zero TS errors.
 - **1.10 — Customer Nav Layout (Web)** ✅ — Sticky CustomerNav with desktop links, CartBadge (live Zustand count), CustomerUserMenu (My Orders/My Issues/Sign Out). Mobile Sheet hamburger. Zustand cart-store with persist middleware (seednest-cart), addItem merges duplicates. Server layout role guard redirects non-CUSTOMER to /dashboard. Zero TS errors.
