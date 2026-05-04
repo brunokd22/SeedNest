@@ -1,25 +1,26 @@
 # Current Feature
 
-## Feature: 2.2 — Backend: Category CRUD API
+## Feature: 2.3 — Backend: Seedling CRUD API + Low-Stock Notifications
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `schemas/category.ts` in shared: `createCategorySchema`, `updateCategorySchema` + types
-- `checkNurseryOwnership.ts` middleware: reads `req.params.nurseryId`, verifies ownership, attaches `req.nursery`
-- `category.service.ts`: getCategoriesByNursery, createCategory, updateCategory, deleteCategory (hard delete, guards seedling count)
-- `routes/category.ts`: public GET, manager POST/PUT/DELETE — router with `mergeParams: true`
-- Mount at `/api/nurseries/:nurseryId/categories` in `app.ts`
+- Update `shared/schemas/seedling.ts` with proper validation (min/max/trim/defaults)
+- `notification.service.ts` stub: `createNotification`
+- `seedling.service.ts`: getSeedlingsByNursery (paginated+filtered), getSeedlingById, createSeedling, updateSeedling (triggers low-stock check), deleteSeedling, checkAndNotifyLowStock
+- `sendLowStockAlert` added to `resend.ts`
+- `routes/seedling.ts`: nursery-scoped router (mergeParams) + global `/api/seedlings/search` router
+- Register both in `app.ts`
 
 ## Notes
 
-- Category router needs `Router({ mergeParams: true })` so `:nurseryId` from parent path is accessible
-- `checkNurseryOwnership` relies on `req.user` being set — only applied on auth-gated routes
-- Hard delete for categories (unlike soft delete for nurseries)
-- Deleting a category with existing seedlings must return 400
+- `SeedlingSize`/`AvailabilityStatus` used from `@prisma/client` in API; shared schema keeps `../types/nursery` (no Prisma dep in shared)
+- `checkAndNotifyLowStock` wraps in try/catch — never throws, never breaks main flow
+- Global search fetches all matching, computes haversine in memory, then paginates
+- Both routers exported from `routes/seedling.ts` (default + named `globalSeedlingRouter`)
 
 ## History
 

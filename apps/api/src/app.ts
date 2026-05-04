@@ -7,6 +7,7 @@ import { errorHandler } from './middleware/errorHandler';
 import authRouter from './routes/auth';
 import nurseryRouter from './routes/nursery';
 import categoryRouter from './routes/category';
+import seedlingRouter, { globalSeedlingRouter } from './routes/seedling';
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use(express.json());
 
 app.use('/api/nurseries', nurseryRouter);
 app.use('/api/nurseries/:nurseryId/categories', categoryRouter);
+app.use('/api/nurseries/:nurseryId/seedlings', seedlingRouter);
+app.use('/api/seedlings', globalSeedlingRouter);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
