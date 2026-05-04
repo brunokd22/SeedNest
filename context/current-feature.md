@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -23,6 +23,7 @@ In Progress
 
 ## History
 
+- **2.2 — Backend: Category CRUD API** ✅ — createCategorySchema/updateCategorySchema in shared. checkNurseryOwnership middleware (reads nurseryId param, verifies ownership, attaches req.nursery). category.service.ts (getCategoriesByNursery, createCategory, updateCategory, deleteCategory with seedling guard). Routes at /api/nurseries/:nurseryId/categories with mergeParams. Zero TS errors.
 - **2.1 — Backend: Nursery CRUD API** ✅ — nursery.service.ts (6 functions incl. haversine geo-sort), routes/nursery.ts (public /explore + /:id/public, manager CRUD), registered at /api/nurseries. AppError/NotFoundError/ForbiddenError added to errorHandler. NurseryWithDistance.distanceKm made optional. Zero TS errors.
 - **1.10 — Customer Nav Layout (Web)** ✅ — Sticky CustomerNav with desktop links, CartBadge (live Zustand count), CustomerUserMenu (My Orders/My Issues/Sign Out). Mobile Sheet hamburger. Zustand cart-store with persist middleware (seednest-cart), addItem merges duplicates. Server layout role guard redirects non-CUSTOMER to /dashboard. Zero TS errors.
 - **1.9 — Manager Sidebar Layout (Web)** ✅ — Collapsible sidebar (256px/64px) with 6 nav items, active route highlighting, tooltips when collapsed, localStorage persistence, mobile Sheet drawer. ManagerShell client component owns collapse state + header (page title, NotificationBell, UserMenu). Server layout with role guard redirecting non-MANAGER to /explore. Zero TS errors.
