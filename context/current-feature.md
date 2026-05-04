@@ -1,24 +1,26 @@
 # Current Feature
 
-## Feature: 1.8 — Expo Mobile App Scaffold
+## Feature: 1.9 — Manager Sidebar Layout (Web)
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- Scaffold @seednest/mobile with Expo SDK 52, expo-router v4, file-based routing
-- NativeWind v4 (Tailwind v3) for styling, Zustand for auth state, SecureStore for token
-- Bottom tab navigator (5 tabs), auth stack (sign-in/up/verify-email/forgot-password)
-- Reusable components: Button, Input, Screen, EmptyState, LoadingSpinner
+- Collapsible Manager dashboard sidebar: 256px expanded / 64px icon-only, persisted to localStorage
+- Mobile: Sheet/drawer toggled from header menu button
+- `ManagerSidebar.tsx`: 6 nav items with lucide icons, active route highlighting, tooltips when collapsed
+- `ManagerShell.tsx`: Client component shell managing collapse state + header bar (page title, NotificationBell, UserMenu)
+- `(manager)/layout.tsx`: Server component with role guard (redirect non-MANAGER to /explore)
+- `UserMenu.tsx`: Sign Out calls `authClient.signOut()` then redirects to `/sign-in`
 
 ## Notes
 
-- Auth uses Bearer tokens (SecureStore) — backend needs bearer plugin for full integration
-- `EXPO_PUBLIC_API_URL` controls the API base URL in Expo
-- NativeWind v4 uses Tailwind CSS v3 (separate from web's Tailwind v4)
-- `main: "expo-router/entry"` is required for file-based routing
+- `(manager)/layout.tsx` is a server component; collapse state lives in `ManagerShell.tsx` (client)
+- Tooltip requires shadcn `tooltip` component (installs `@radix-ui/react-tooltip`)
+- Middleware already guards routes; layout guard is defense-in-depth
+- `headers()` used in layout to forward cookie header to backend session check
 
 ## History
 
