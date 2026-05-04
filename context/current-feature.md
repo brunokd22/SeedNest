@@ -1,26 +1,25 @@
 # Current Feature
 
-## Feature: 2.1 — Backend: Nursery CRUD API
+## Feature: 2.2 — Backend: Category CRUD API
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `nursery.service.ts`: getAllNurseries, getNurseryById, createNursery, updateNursery, deleteNursery (soft), getNurseriesForExplore (haversine sort)
-- `routes/nursery.ts`: manager CRUD + public /explore and /:id/public routes
-- Register router at `/api/nurseries` in `app.ts`
-- Add `AppError`, `NotFoundError`, `ForbiddenError` classes to `errorHandler.ts`
-- Update `NurseryWithDistance` in shared to have `distanceKm?: number` (optional)
+- `schemas/category.ts` in shared: `createCategorySchema`, `updateCategorySchema` + types
+- `checkNurseryOwnership.ts` middleware: reads `req.params.nurseryId`, verifies ownership, attaches `req.nursery`
+- `category.service.ts`: getCategoriesByNursery, createCategory, updateCategory, deleteCategory (hard delete, guards seedling count)
+- `routes/category.ts`: public GET, manager POST/PUT/DELETE — router with `mergeParams: true`
+- Mount at `/api/nurseries/:nurseryId/categories` in `app.ts`
 
 ## Notes
 
-- `/explore` must be registered before `/:id` in the router to avoid param swallowing
-- Soft delete: set `isActive = false`, no hard delete
-- `haversine(lat1, lon1, lat2, lon2)` util already exists in `apps/api/src/utils/haversine.ts`
-- `validate` middleware from `apps/api/src/middleware/validate.ts` used for body validation
-- `express.json()` is in `app.ts` — nursery router must be registered after it
+- Category router needs `Router({ mergeParams: true })` so `:nurseryId` from parent path is accessible
+- `checkNurseryOwnership` relies on `req.user` being set — only applied on auth-gated routes
+- Hard delete for categories (unlike soft delete for nurseries)
+- Deleting a category with existing seedlings must return 400
 
 ## History
 

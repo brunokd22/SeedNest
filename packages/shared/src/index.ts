@@ -9,3 +9,4 @@ export * from './schemas/nursery';
 export * from './schemas/seedling';
 export * from './schemas/order';
 export * from './schemas/issue';
+export * from './schemas/category';
