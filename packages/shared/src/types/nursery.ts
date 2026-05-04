@@ -27,5 +27,5 @@ export type Nursery = {
 };
 
 export type NurseryWithDistance = Nursery & {
-  distanceKm: number;
+  distanceKm?: number;
 };
