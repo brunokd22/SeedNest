@@ -1,6 +1,6 @@
 # Current Feature
 
-## Feature: 1.6 — Next.js Web App Scaffold
+## Feature: 1.7 — Auth Pages (Web)
 
 ## Status
 
@@ -8,21 +8,21 @@ Completed
 
 ## Goals
 
-- Scaffold Next.js 15 app with App Router, Tailwind v4, shadcn/ui (green), TanStack Query, Better Auth client
-- Create route group structure: (public), (auth), (customer), (manager)
-- Implement auth middleware with role-based redirects
-- Wire up lib/, providers/, and env example
+- Build all 5 auth pages: sign-up, sign-in, verify-email (OTP), forgot-password, reset-password
+- Each page uses shadcn/ui + react-hook-form + Zod + better-auth client
+- OTP verify-email: 6-box input with auto-advance and 60s resend cooldown
+- Role-based redirect after sign-in (MANAGER → /dashboard, CUSTOMER → /explore)
 
 ## Notes
 
-- No tailwind.config.ts (Tailwind v4 CSS-based config only)
-- shadcn style: default, base color: green, CSS variables: yes
-- Light mode only (dark mode not supported per project spec)
-- Auth client uses `better-auth/react`
-- Middleware calls API's `/api/auth/get-session` for session check
+- Add `emailOTP` plugin to backend auth config to support OTP verification
+- Client plugin: `emailOTPClient` from `better-auth/client/plugins`
+- `signUpWithRole` helper wraps `authClient.signUp.email` to pass additional `role` field
+- Use schemas from `@seednest/shared` where available; define local schemas for confirm-password
 
 ## History
 
+- **1.7 — Auth Pages (Web)** ✅ — All 5 auth pages implemented: sign-up (role select, show/hide password), sign-in (Google OAuth, role-based redirect), verify-email (6-box OTP with auto-advance + 60s resend cooldown), forgot-password (always-safe response), reset-password (confirm password match). emailOTP plugin added to backend. Shared zod upgraded to v4. Zero TS errors.
 - **1.6 — Next.js Web App Scaffold** ✅ — Next.js 15 + Tailwind v4 + shadcn/ui (22 components, zinc base, green CSS vars). TanStack Query, Better Auth client, Axios. Route groups (public/auth/customer/manager). Auth middleware with role-based redirects. Zero TS errors.
 - **1.5 — Better Auth Configuration** ✅ — Better Auth wired to Prisma adapter; email/password with verification; optional Google OAuth; React Email templates (verification, reset-password, welcome); full `requireAuth`/`requireRole` middleware; `/api/auth` mounted in Express. Zero TS errors.
 - **1.4 — Shared Types Package** ✅ — `packages/shared/src/` populated with types (user, nursery, order, issue, api), constants, and Zod schemas (auth, nursery, seedling, order, issue). All enums match Prisma schema. Compiles with zero TypeScript errors.

@@ -1,9 +1,10 @@
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
+import { emailOTP } from 'better-auth/plugins';
 import { UserRole } from '@seednest/shared';
 import { prisma } from './prisma';
 import { env } from './env';
-import { sendVerificationEmail, sendPasswordResetEmail, sendWelcomeEmail } from './resend';
+import { sendVerificationEmail, sendPasswordResetEmail, sendWelcomeEmail, sendOtpEmail } from './resend';
 
 export const auth = betterAuth({
   baseURL: env.BETTER_AUTH_URL,
@@ -27,6 +28,14 @@ export const auth = betterAuth({
       await sendVerificationEmail(user.email, url);
     },
   },
+
+  plugins: [
+    emailOTP({
+      async sendVerificationOTP({ email, otp }: { email: string; otp: string }) {
+        await sendOtpEmail(email, otp);
+      },
+    }),
+  ],
 
   socialProviders: {
     ...(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET
