@@ -6,6 +6,7 @@ import { env } from './config/env';
 import { errorHandler } from './middleware/errorHandler';
 import authRouter from './routes/auth';
 import nurseryRouter from './routes/nursery';
+import categoryRouter from './routes/category';
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use('/api/auth', authRouter);
 app.use(express.json());
 
 app.use('/api/nurseries', nurseryRouter);
+app.use('/api/nurseries/:nurseryId/categories', categoryRouter);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
