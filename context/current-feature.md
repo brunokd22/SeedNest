@@ -1,25 +1,24 @@
 # Current Feature
 
-## Feature: 2.8 — Mobile: Customer Explore Screens
+## Feature: 2.9 — Backend + Web: Manager Dashboard Overview
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- Mobile `useExplore.ts` (4 hooks), `cart-store.ts` (Zustand + AsyncStorage persist)
-- `NurseryCard.tsx` + `SeedlingCard.tsx` — RN components with expo-image, StyleSheet shadows
-- `explore/index.tsx` — MapView + list toggle, auto location on mount, bottom horizontal scroll, callouts
-- `explore/[nurseryId].tsx` — cover header, category chips, 2-col FlatList of SeedlingCards
-- `explore/seedling/[seedlingId].tsx` — paginated photo carousel with dots, quantity stepper, sticky bottom cart bar
+- Backend: `GET /api/dashboard/stats` — all queries in parallel via Promise.all; low-stock filtered per-nursery threshold in JS; registered in app.ts
+- Frontend: `useDashboard.ts` hook (staleTime 30s, refetchInterval 60s)
+- `StatCard.tsx` — icon circle + title + value (skeleton while loading) + description
+- `/dashboard/page.tsx` — time-based greeting, 4 stat cards, Recent Orders table, Low Stock list, no-nurseries welcome card
 
 ## Notes
 
-- expo-location + react-native-maps already installed; only expo-image needs installing
-- lucide-react-native icons use `size` + `color` props (no className)
-- EmptyState component requires `icon`, `title`, `description` props
-- Tabs layout already routes `/(tabs)/explore/*`
+- Low stock Prisma query uses `quantity: { lte: 20 }` then JS-filters against per-nursery threshold
+- Recent orders include nursery name + customer name (nullable → guestName → "Walk-in")
+- `IssueStatus.OPEN / IN_PROGRESS` enum values used for open issues count
+- No `any` types; `UserRole.MANAGER` from shared
 
 ## History
 
