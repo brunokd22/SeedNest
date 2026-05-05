@@ -1,24 +1,25 @@
 # Current Feature
 
-## Feature: 2.4 — Backend: Cloudflare R2 Presigned Upload System
+## Feature: 2.5 — Web: Manager Nurseries UI
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `apps/api/src/config/r2.ts`: S3Client pointed at Cloudflare R2 endpoint
-- `apps/api/src/services/upload.service.ts`: `generatePresignedUploadUrl` + `deleteFile`
-- `apps/api/src/routes/upload.ts`: POST `/api/upload/presign` + DELETE `/api/upload` — both protected by `requireAuth`, key ownership checked on delete
-- Register upload router in `app.ts`
-- `apps/web/src/lib/hooks/useUpload.ts`: client hook — fetches presigned URL, PUTs file directly to R2, returns public URL
+- `useNurseries.ts` / `useCategories.ts` — TanStack Query CRUD hooks
+- `CreateNurseryDialog.tsx` — react-hook-form dialog for creating a nursery
+- Nurseries list page: shadcn Table, skeletons, empty state, delete AlertDialog
+- Nursery detail page: edit form + GPS Card (Use My Location + map iframe) + cover photo Card
+- Categories page: inline add/edit/delete with optimistic UI
 
 ## Notes
 
-- Key format: `${folder}/${userId}/${Date.now()}-${uuidv4()}.${ext}`
-- DELETE validates folder prefix (seedlings/ or nurseries/) and user ownership (`/${userId}/` in key)
-- Install: `@aws-sdk/client-s3`, `@aws-sdk/s3-request-presigner`, `uuid`, `@types/uuid`
+- Added `coverImageUrl` to shared nursery schema so PUT /api/nurseries/:id accepts it
+- Install shadcn `alert-dialog` component
+- `useUpdateNursery` does NOT toast — callers do
+- Tabs on detail page use `asChild` + `Link` with `value={pathname}` for active state
 
 ## History
 
