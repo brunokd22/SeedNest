@@ -1,26 +1,25 @@
 # Current Feature
 
-## Feature: 2.7 — Web: Customer Explore & Nursery Discovery
+## Feature: 2.8 — Mobile: Customer Explore Screens
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `useExplore.ts` — 4 public TanStack Query hooks (explore, public nursery, public seedlings, public seedling)
-- `NurseryCard.tsx` — card with cover image/gradient, distance badge, address, hours
-- `explore/page.tsx` — hero + LocationButton (geolocation state machine) + nursery grid
-- `explore/[nurseryId]/page.tsx` — hero overlay, two-col layout, filter bar (tabs, toggle-group, search, slider, switch), seedlings grid
-- `SeedlingCard.tsx` — photo, availability badge, add-to-cart, link to detail
-- `explore/[nurseryId]/seedlings/[seedlingId]/page.tsx` — photo gallery, quantity selector, add to cart
+- Mobile `useExplore.ts` (4 hooks), `cart-store.ts` (Zustand + AsyncStorage persist)
+- `NurseryCard.tsx` + `SeedlingCard.tsx` — RN components with expo-image, StyleSheet shadows
+- `explore/index.tsx` — MapView + list toggle, auto location on mount, bottom horizontal scroll, callouts
+- `explore/[nurseryId].tsx` — cover header, category chips, 2-col FlatList of SeedlingCards
+- `explore/seedling/[seedlingId].tsx` — paginated photo carousel with dots, quantity stepper, sticky bottom cart bar
 
 ## Notes
 
-- Install shadcn: toggle-group, slider, switch
-- Update CartItem: add `size?: string`, change `photo: string` → `photo: string | null`
-- `useNurseriesExplore` omits lat/lng params when undefined
-- Price slider max=100000; when at max treat as no price limit
+- expo-location + react-native-maps already installed; only expo-image needs installing
+- lucide-react-native icons use `size` + `color` props (no className)
+- EmptyState component requires `icon`, `title`, `description` props
+- Tabs layout already routes `/(tabs)/explore/*`
 
 ## History
 
