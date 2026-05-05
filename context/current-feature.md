@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -22,6 +22,7 @@ In Progress
 
 ## History
 
+- **2.9 — Dashboard Overview** ✅ — GET /api/dashboard/stats (Promise.all: seedling count, monthly revenue, open issues, last 5 orders, low-stock filtered per-nursery threshold). useDashboard.ts (staleTime 30s, refetchInterval 60s). StatCard.tsx. /dashboard page (greeting, 4 stat cards, Recent Orders table, Low Stock list, no-nurseries welcome). Zero TS errors.
 - **2.8 — Mobile: Customer Explore Screens** ✅ — Mobile useExplore.ts (4 hooks), cart-store.ts (Zustand + AsyncStorage persist). NurseryCard + SeedlingCard (RN components with expo-image, StyleSheet shadows). explore/index.tsx (MapView + list toggle, auto location on mount, bottom horizontal scroll, callouts). explore/[nurseryId].tsx (cover header, category chips, 2-col FlatList). Seedling detail (paginated photo carousel with dots, quantity stepper, sticky bottom cart bar). Zero TS errors.
 - **2.7 — Web: Customer Explore & Nursery Discovery** ✅ — useExplore.ts (4 public hooks). NurseryCard (cover/gradient, distance badge). SeedlingCard (photo/gradient, availability badge, Add to Cart). explore/page.tsx (LocationButton state machine). explore/[nurseryId]/page.tsx (hero overlay, category pill tabs, ToggleGroup, debounced search, Slider, Switch). Seedling detail (photo gallery, qty selector, Add/Update Cart). Zero TS errors.
 - **2.6 — Web: Manager Seedlings UI** ✅ — useSeedlings.ts (5 hooks, useSeedling returns wrapped for data?.data pattern). SeedlingForm with PhotoUploadZone (drag-drop, 5MB/5 photo limits, parallel R2 uploads, key-tracked deletion). Seedlings list page (debounced search, 4 filters, clear link, Table 8 cols, pagination). new + edit pages. useUpload now returns { publicUrl, key }. Zero TS errors.
