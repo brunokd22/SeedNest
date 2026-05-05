@@ -1,25 +1,24 @@
 # Current Feature
 
-## Feature: 2.5 — Web: Manager Nurseries UI
+## Feature: 2.6 — Web: Manager Seedlings UI
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `useNurseries.ts` / `useCategories.ts` — TanStack Query CRUD hooks
-- `CreateNurseryDialog.tsx` — react-hook-form dialog for creating a nursery
-- Nurseries list page: shadcn Table, skeletons, empty state, delete AlertDialog
-- Nursery detail page: edit form + GPS Card (Use My Location + map iframe) + cover photo Card
-- Categories page: inline add/edit/delete with optimistic UI
+- `useSeedlings.ts` — 5 TanStack Query hooks (list, single, create, update, delete)
+- `SeedlingForm.tsx` — react-hook-form with Select fields + `PhotoUploadZone` sub-component (drag & drop, 5 photo max, 5 MB limit, R2 upload via `useUpload`)
+- Seedlings list page: filters bar (search debounced 400ms, category, size, status), Table with 8 cols, pagination, delete AlertDialog
+- `seedlings/new/page.tsx` + `seedlings/[seedlingId]/edit/page.tsx` — wrappers around SeedlingForm
+- Modify `useUpload` to return `{ publicUrl, key }` instead of just `publicUrl`
 
 ## Notes
 
-- Added `coverImageUrl` to shared nursery schema so PUT /api/nurseries/:id accepts it
-- Install shadcn `alert-dialog` component
-- `useUpdateNursery` does NOT toast — callers do
-- Tabs on detail page use `asChild` + `Link` with `value={pathname}` for active state
+- `useSeedling` returns wrapped `{ success, data: Seedling }` so edit page `data?.data` is the seedling
+- Photos managed as `{ url, key?, uploading }[]` state; functional `setPhotos` updates avoid stale closure issues
+- R2 key deletion only for newly-uploaded photos (ones with a `key` in state)
 
 ## History
 

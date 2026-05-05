@@ -9,7 +9,10 @@ type PresignResponse = {
 };
 
 export function useUpload(): {
-  uploadFile: (file: File, folder: 'seedlings' | 'nurseries') => Promise<string>;
+  uploadFile: (
+    file: File,
+    folder: 'seedlings' | 'nurseries',
+  ) => Promise<{ publicUrl: string; key: string }>;
   isUploading: boolean;
 } {
   const [isUploading, setIsUploading] = useState(false);
@@ -17,7 +20,7 @@ export function useUpload(): {
   const uploadFile = async (
     file: File,
     folder: 'seedlings' | 'nurseries',
-  ): Promise<string> => {
+  ): Promise<{ publicUrl: string; key: string }> => {
     setIsUploading(true);
     try {
       const { data: presign } = await api.post<PresignResponse>(
@@ -25,7 +28,7 @@ export function useUpload(): {
         { filename: file.name, contentType: file.type, folder },
       );
 
-      const { uploadUrl, publicUrl } = presign.data;
+      const { uploadUrl, publicUrl, key } = presign.data;
 
       const uploadRes = await fetch(uploadUrl, {
         method: 'PUT',
@@ -37,7 +40,7 @@ export function useUpload(): {
         throw new Error('Upload failed');
       }
 
-      return publicUrl;
+      return { publicUrl, key };
     } finally {
       setIsUploading(false);
     }
