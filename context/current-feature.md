@@ -1,26 +1,24 @@
 # Current Feature
 
-## Feature: 2.3 — Backend: Seedling CRUD API + Low-Stock Notifications
+## Feature: 2.4 — Backend: Cloudflare R2 Presigned Upload System
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- Update `shared/schemas/seedling.ts` with proper validation (min/max/trim/defaults)
-- `notification.service.ts` stub: `createNotification`
-- `seedling.service.ts`: getSeedlingsByNursery (paginated+filtered), getSeedlingById, createSeedling, updateSeedling (triggers low-stock check), deleteSeedling, checkAndNotifyLowStock
-- `sendLowStockAlert` added to `resend.ts`
-- `routes/seedling.ts`: nursery-scoped router (mergeParams) + global `/api/seedlings/search` router
-- Register both in `app.ts`
+- `apps/api/src/config/r2.ts`: S3Client pointed at Cloudflare R2 endpoint
+- `apps/api/src/services/upload.service.ts`: `generatePresignedUploadUrl` + `deleteFile`
+- `apps/api/src/routes/upload.ts`: POST `/api/upload/presign` + DELETE `/api/upload` — both protected by `requireAuth`, key ownership checked on delete
+- Register upload router in `app.ts`
+- `apps/web/src/lib/hooks/useUpload.ts`: client hook — fetches presigned URL, PUTs file directly to R2, returns public URL
 
 ## Notes
 
-- `SeedlingSize`/`AvailabilityStatus` used from `@prisma/client` in API; shared schema keeps `../types/nursery` (no Prisma dep in shared)
-- `checkAndNotifyLowStock` wraps in try/catch — never throws, never breaks main flow
-- Global search fetches all matching, computes haversine in memory, then paginates
-- Both routers exported from `routes/seedling.ts` (default + named `globalSeedlingRouter`)
+- Key format: `${folder}/${userId}/${Date.now()}-${uuidv4()}.${ext}`
+- DELETE validates folder prefix (seedlings/ or nurseries/) and user ownership (`/${userId}/` in key)
+- Install: `@aws-sdk/client-s3`, `@aws-sdk/s3-request-presigner`, `uuid`, `@types/uuid`
 
 ## History
 

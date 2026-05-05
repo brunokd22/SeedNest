@@ -8,6 +8,7 @@ import authRouter from './routes/auth';
 import nurseryRouter from './routes/nursery';
 import categoryRouter from './routes/category';
 import seedlingRouter, { globalSeedlingRouter } from './routes/seedling';
+import uploadRouter from './routes/upload';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/api/nurseries', nurseryRouter);
 app.use('/api/nurseries/:nurseryId/categories', categoryRouter);
 app.use('/api/nurseries/:nurseryId/seedlings', seedlingRouter);
 app.use('/api/seedlings', globalSeedlingRouter);
+app.use('/api/upload', uploadRouter);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
