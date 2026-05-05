@@ -6,6 +6,7 @@ export const createNurserySchema = z.object({
   address:           z.string(),
   latitude:          z.number().optional(),
   longitude:         z.number().optional(),
+  coverImageUrl:     z.string().optional(),
   operatingHours:    z.string().optional(),
   lowStockThreshold: z.number().int().optional(),
   careReminderDays:  z.number().int().optional(),
