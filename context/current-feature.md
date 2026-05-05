@@ -1,24 +1,26 @@
 # Current Feature
 
-## Feature: 2.6 — Web: Manager Seedlings UI
+## Feature: 2.7 — Web: Customer Explore & Nursery Discovery
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `useSeedlings.ts` — 5 TanStack Query hooks (list, single, create, update, delete)
-- `SeedlingForm.tsx` — react-hook-form with Select fields + `PhotoUploadZone` sub-component (drag & drop, 5 photo max, 5 MB limit, R2 upload via `useUpload`)
-- Seedlings list page: filters bar (search debounced 400ms, category, size, status), Table with 8 cols, pagination, delete AlertDialog
-- `seedlings/new/page.tsx` + `seedlings/[seedlingId]/edit/page.tsx` — wrappers around SeedlingForm
-- Modify `useUpload` to return `{ publicUrl, key }` instead of just `publicUrl`
+- `useExplore.ts` — 4 public TanStack Query hooks (explore, public nursery, public seedlings, public seedling)
+- `NurseryCard.tsx` — card with cover image/gradient, distance badge, address, hours
+- `explore/page.tsx` — hero + LocationButton (geolocation state machine) + nursery grid
+- `explore/[nurseryId]/page.tsx` — hero overlay, two-col layout, filter bar (tabs, toggle-group, search, slider, switch), seedlings grid
+- `SeedlingCard.tsx` — photo, availability badge, add-to-cart, link to detail
+- `explore/[nurseryId]/seedlings/[seedlingId]/page.tsx` — photo gallery, quantity selector, add to cart
 
 ## Notes
 
-- `useSeedling` returns wrapped `{ success, data: Seedling }` so edit page `data?.data` is the seedling
-- Photos managed as `{ url, key?, uploading }[]` state; functional `setPhotos` updates avoid stale closure issues
-- R2 key deletion only for newly-uploaded photos (ones with a `key` in state)
+- Install shadcn: toggle-group, slider, switch
+- Update CartItem: add `size?: string`, change `photo: string` → `photo: string | null`
+- `useNurseriesExplore` omits lat/lng params when undefined
+- Price slider max=100000; when at max treat as no price limit
 
 ## History
 

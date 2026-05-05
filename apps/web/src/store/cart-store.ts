@@ -7,7 +7,8 @@ type CartItem = {
   price: number;
   quantity: number;
   nurseryId: string;
-  photo: string;
+  photo: string | null;
+  size?: string;
 };
 
 type CartStore = {
