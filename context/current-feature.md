@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -24,6 +24,7 @@ In Progress
 
 ## History
 
+- **2.7 — Web: Customer Explore & Nursery Discovery** ✅ — useExplore.ts (4 public hooks). NurseryCard (cover/gradient, distance badge). SeedlingCard (photo/gradient, availability badge, Add to Cart). explore/page.tsx (LocationButton state machine). explore/[nurseryId]/page.tsx (hero overlay, category pill tabs, ToggleGroup, debounced search, Slider, Switch). Seedling detail (photo gallery, qty selector, Add/Update Cart). Zero TS errors.
 - **2.6 — Web: Manager Seedlings UI** ✅ — useSeedlings.ts (5 hooks, useSeedling returns wrapped for data?.data pattern). SeedlingForm with PhotoUploadZone (drag-drop, 5MB/5 photo limits, parallel R2 uploads, key-tracked deletion). Seedlings list page (debounced search, 4 filters, clear link, Table 8 cols, pagination). new + edit pages. useUpload now returns { publicUrl, key }. Zero TS errors.
 - **2.5 — Web: Manager Nurseries UI** ✅ — useNurseries/useCategories TanStack Query hooks. CreateNurseryDialog (react-hook-form). Nurseries list page (Table, skeletons, empty state, delete AlertDialog). Nursery detail page (edit form, GPS Card with Use My Location + OSM iframe, cover photo R2 upload). Categories page (inline add/edit/delete, seedling count badge, delete warning). Added coverImageUrl to shared nursery schema. Zero TS errors.
 - **2.4 — Backend: Cloudflare R2 Presigned Upload System** ✅ — r2Client S3Client config. upload.service.ts (generatePresignedUploadUrl + deleteFile). POST /api/upload/presign (auth, Zod, key = folder/userId/timestamp-uuid.ext) + DELETE /api/upload (folder prefix + user ownership guards). useUpload hook in web (presign → PUT to R2 → publicUrl, isUploading state). Zero TS errors.
