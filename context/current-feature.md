@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -23,6 +23,7 @@ In Progress
 
 ## History
 
+- **2.5 — Web: Manager Nurseries UI** ✅ — useNurseries/useCategories TanStack Query hooks. CreateNurseryDialog (react-hook-form). Nurseries list page (Table, skeletons, empty state, delete AlertDialog). Nursery detail page (edit form, GPS Card with Use My Location + OSM iframe, cover photo R2 upload). Categories page (inline add/edit/delete, seedling count badge, delete warning). Added coverImageUrl to shared nursery schema. Zero TS errors.
 - **2.4 — Backend: Cloudflare R2 Presigned Upload System** ✅ — r2Client S3Client config. upload.service.ts (generatePresignedUploadUrl + deleteFile). POST /api/upload/presign (auth, Zod, key = folder/userId/timestamp-uuid.ext) + DELETE /api/upload (folder prefix + user ownership guards). useUpload hook in web (presign → PUT to R2 → publicUrl, isUploading state). Zero TS errors.
 - **2.3 — Backend: Seedling CRUD API + Low-Stock Notifications** ✅ — Updated shared seedling schema (min/max/trim/defaults). notification.service.ts stub. seedling.service.ts (6 functions incl. paginated filter query + checkAndNotifyLowStock with try/catch guard). sendLowStockAlert HTML email in resend.ts. Nursery-scoped router + globalSeedlingRouter (/api/seedlings/search with haversine sort). Zero TS errors.
 - **2.2 — Backend: Category CRUD API** ✅ — createCategorySchema/updateCategorySchema in shared. checkNurseryOwnership middleware (reads nurseryId param, verifies ownership, attaches req.nursery). category.service.ts (getCategoriesByNursery, createCategory, updateCategory, deleteCategory with seedling guard). Routes at /api/nurseries/:nurseryId/categories with mergeParams. Zero TS errors.
