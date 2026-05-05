@@ -110,7 +110,7 @@ export default function NurseryDetailPage() {
     const file = e.target.files?.[0];
     if (!file) return;
     try {
-      const publicUrl = await uploadFile(file, 'nurseries');
+      const { publicUrl } = await uploadFile(file, 'nurseries');
       updateNursery.mutate(
         { id: nurseryId, coverImageUrl: publicUrl },
         { onSuccess: () => toast.success('Cover photo updated!') },
