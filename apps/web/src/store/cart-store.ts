@@ -13,10 +13,12 @@ type CartItem = {
 
 type CartStore = {
   items: CartItem[];
+  fulfillmentType: 'DELIVERY' | 'PICKUP';
   addItem: (item: CartItem) => void;
   removeItem: (seedlingId: string) => void;
   updateQuantity: (seedlingId: string, quantity: number) => void;
   clearCart: () => void;
+  setFulfillmentType: (type: 'DELIVERY' | 'PICKUP') => void;
   totalItems: () => number;
   totalAmount: () => number;
 };
@@ -25,6 +27,7 @@ export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
+      fulfillmentType: 'PICKUP' as 'DELIVERY' | 'PICKUP',
 
       addItem: (item) =>
         set((state) => {
@@ -54,6 +57,8 @@ export const useCartStore = create<CartStore>()(
         })),
 
       clearCart: () => set({ items: [] }),
+
+      setFulfillmentType: (type) => set({ fulfillmentType: type }),
 
       totalItems: () => get().items.reduce((sum, i) => sum + i.quantity, 0),
 

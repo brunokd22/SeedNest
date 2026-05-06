@@ -1,23 +1,25 @@
 # Current Feature
 
-## Feature: 3.3 — Backend: Walk-in Sales & Order Management API
+## Feature: 3.4 — Web: Cart & Checkout Pages
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `order.service.ts`: createWalkinOrder (Prisma tx: Order+OrderItems+quantity decrements, saleMethod WALKIN, fulfillmentStatus COLLECTED), getOrdersByManager (paginated+filtered), getOrderById (ownership check for both roles), updateFulfillmentStatus (customer notification), getOrdersByCustomer (paginated)
-- `routes/order.ts`: 4 manager routes + 2 customer routes + /api/users/search + /api/orders/by-payment-intent/:id
-- `app.ts`: `app.use(orderRoutes)` after express.json()
+- `useCheckout.ts`: useCreatePaymentIntent (POST /api/checkout/create-payment-intent) + useOrderByPaymentIntent (GET /api/orders/by-payment-intent/:id)
+- `cart-store.ts`: add fulfillmentType + setFulfillmentType
+- `cart/page.tsx`: group by nurseryId, multi-nursery warning, qty stepper, remove, fulfillment selector, order summary
+- `checkout/page.tsx`: redirect if empty, delivery address + geolocation reverse-geocode, Stripe Elements + PaymentElement, clearCart on confirmation
+- `order-confirmation/page.tsx`: read payment_intent param, fetch order, success animation
 
 ## Notes
 
-- `/api/orders` routes use no base-path prefix — `app.use(orderRoutes)` registers them at root
-- Walk-in orders always: fulfillmentType=PICKUP, fulfillmentStatus=COLLECTED, saleMethod=WALKIN
-- `by-payment-intent` route comes BEFORE `/:id` in router to avoid param collision
-- Zod v4 uses `.issues[0]?.message` not `.errors[0]?.message`
+- Install @stripe/stripe-js + @stripe/react-stripe-js in web
+- NurseryGroup component calls usePublicNursery per group for name lookup (avoids adding nurseryName to CartItem)
+- useEffect + ref guard for createPaymentIntent on mount (prevents StrictMode double-fire)
+- cartStore.clearCart() called on order-confirmation page after order loads
 
 ## History
 
