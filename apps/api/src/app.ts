@@ -11,6 +11,7 @@ import seedlingRouter, { globalSeedlingRouter } from './routes/seedling';
 import uploadRouter from './routes/upload';
 import dashboardRouter from './routes/dashboard';
 import { checkoutRouter, stripeWebhookRouter } from './routes/checkout';
+import orderRoutes from './routes/order';
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use('/api/seedlings', globalSeedlingRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/checkout', checkoutRouter);
+app.use(orderRoutes);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
