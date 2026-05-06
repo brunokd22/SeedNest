@@ -9,7 +9,11 @@ export default function RootLayout() {
     <QueryProvider>
       <StripeProvider publishableKey={process.env.EXPO_PUBLIC_STRIPE_KEY ?? ''}>
         <AuthProvider>
-          <Stack screenOptions={{ headerShown: false }} />
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="checkout" options={{ presentation: 'modal', headerShown: true, title: 'Checkout' }} />
+            <Stack.Screen name="order-confirmation" options={{ headerShown: false }} />
+          </Stack>
         </AuthProvider>
       </StripeProvider>
     </QueryProvider>
