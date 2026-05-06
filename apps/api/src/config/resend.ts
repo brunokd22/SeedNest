@@ -52,6 +52,68 @@ export async function sendWelcomeEmail(to: string, name: string, role: UserRole)
   });
 }
 
+export async function sendOrderReceiptEmail(params: {
+  to: string;
+  customerName: string;
+  orderId: string;
+  nurseryName: string;
+  items: { name: string; size: string; quantity: number; unitPrice: number }[];
+  totalAmount: number;
+  fulfillmentType: string;
+}): Promise<void> {
+  const itemRows = params.items
+    .map(
+      (i) =>
+        `<tr>
+          <td style="padding:8px;border-bottom:1px solid #E5E7EB;">${i.name} (${i.size})</td>
+          <td style="padding:8px;border-bottom:1px solid #E5E7EB;text-align:center;">${i.quantity}</td>
+          <td style="padding:8px;border-bottom:1px solid #E5E7EB;text-align:right;">UGX ${(i.unitPrice * i.quantity).toLocaleString()}</td>
+        </tr>`,
+    )
+    .join('');
+
+  const html = `
+    <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
+      <div style="background:#2D6A4F;padding:24px;text-align:center;">
+        <h1 style="color:white;margin:0;font-size:24px;">SeedNest</h1>
+      </div>
+      <div style="padding:32px;">
+        <h2 style="color:#1a1a1a;">Order Confirmation</h2>
+        <p>Hi ${params.customerName}, thank you for your order!</p>
+        <p style="color:#6B7280;font-size:14px;">Order #${params.orderId.slice(0, 8).toUpperCase()} · ${params.nurseryName} · ${params.fulfillmentType}</p>
+        <table style="width:100%;border-collapse:collapse;margin:24px 0;">
+          <thead>
+            <tr style="background:#F9FAFB;">
+              <th style="padding:8px;text-align:left;font-size:13px;color:#374151;">Item</th>
+              <th style="padding:8px;text-align:center;font-size:13px;color:#374151;">Qty</th>
+              <th style="padding:8px;text-align:right;font-size:13px;color:#374151;">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>${itemRows}</tbody>
+        </table>
+        <div style="text-align:right;margin-top:16px;">
+          <span style="font-size:18px;font-weight:bold;color:#2D6A4F;">
+            Total: UGX ${params.totalAmount.toLocaleString()}
+          </span>
+        </div>
+        <p style="margin-top:24px;color:#6B7280;font-size:14px;">
+          We'll notify you when your order is ready.
+        </p>
+      </div>
+      <div style="padding:24px;text-align:center;color:#9CA3AF;font-size:14px;border-top:1px solid #E5E7EB;">
+        SeedNest · Nurturing Uganda's forests
+      </div>
+    </div>
+  `;
+
+  await resend.emails.send({
+    from: FROM,
+    to: params.to,
+    subject: `Order Confirmed — UGX ${params.totalAmount.toLocaleString()} at ${params.nurseryName}`,
+    html,
+  });
+}
+
 export async function sendLowStockAlert(
   to: string,
   managerName: string,

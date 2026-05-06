@@ -10,6 +10,7 @@ import categoryRouter from './routes/category';
 import seedlingRouter, { globalSeedlingRouter } from './routes/seedling';
 import uploadRouter from './routes/upload';
 import dashboardRouter from './routes/dashboard';
+import { checkoutRouter, stripeWebhookRouter } from './routes/checkout';
 
 const app = express();
 
@@ -21,6 +22,10 @@ if (env.NODE_ENV === 'development') {
 
 app.use('/api/auth', authRouter);
 
+// Stripe webhook MUST be mounted before express.json() so the raw body is preserved
+// for signature verification.
+app.use('/api/webhooks/stripe', stripeWebhookRouter);
+
 app.use(express.json());
 
 app.use('/api/nurseries', nurseryRouter);
@@ -29,6 +34,7 @@ app.use('/api/nurseries/:nurseryId/seedlings', seedlingRouter);
 app.use('/api/seedlings', globalSeedlingRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/dashboard', dashboardRouter);
+app.use('/api/checkout', checkoutRouter);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
