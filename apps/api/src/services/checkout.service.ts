@@ -199,10 +199,7 @@ export async function fulfillOrder(paymentIntentId: string) {
         }),
         totalAmount,
         fulfillmentType: meta.fulfillmentType,
-      });
-      await prisma.order.update({
-        where: { id: order.id },
-        data: { receiptEmailSent: true },
+        deliveryAddress: meta.deliveryAddress || undefined,
       });
     }
   } catch (err) {

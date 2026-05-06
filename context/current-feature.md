@@ -1,25 +1,25 @@
 # Current Feature
 
-## Feature: 3.1 — Backend: Stripe Checkout & Webhook
+## Feature: 3.2 — Backend: Order Receipt Email & Notification Emails
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `config/stripe.ts` — Stripe client with apiVersion `2024-12-18.acacia`
-- `services/checkout.service.ts` — `createPaymentIntent` (validate seedlings → total → PaymentIntent) + `fulfillOrder` (idempotent: retrieve PI → Prisma transaction: Order + OrderItems + quantity decrements → CareReminder → receipt email → low-stock check)
-- `routes/checkout.ts` — POST `/api/checkout/create-payment-intent` (auth + CUSTOMER) + POST `/api/webhooks/stripe` (raw body, signature verify, fire-and-forget fulfillOrder)
-- `app.ts` — webhook route registered BEFORE `express.json()` (CRITICAL for Stripe signature verification)
-- Add `sendOrderReceiptEmail` to `config/resend.ts`
+- `emails/order-receipt.tsx` — React Email template (header, items table, fulfillment block, CTA, care reminder note, footer)
+- Replace inline-HTML `sendOrderReceiptEmail` in `config/resend.ts` with React Email render + `receiptEmailSent` DB update
+- `sendIssueNotificationEmail` — notifies manager of new issue
+- `sendIssueReplyEmail` — notifies customer of manager reply
+- `sendCareReminderEmail` — sends care tips to customer post-purchase
 
 ## Notes
 
-- Webhook must use `express.raw({ type: 'application/json' })` not `express.json()`
-- `fulfillOrder` is idempotent: checks for existing Order by stripePaymentIntentId first
-- UGX uses 1:1 smallest-unit ratio (no multiplication by 100)
-- CareReminder scheduledAt = now + nursery.careReminderDays days
+- OrderItem has snapshot fields (seedlingName, seedlingSize, unitPrice) — no seedling join needed
+- All email functions wrap send in try/catch and never throw — receipt failure must not break order fulfillment
+- `FRONTEND_URL` used for order CTA link: `${process.env.FRONTEND_URL}/my-orders/${orderId}`
+- Simple inline HTML for the 3 notification functions (no React Email)
 
 ## History
 
