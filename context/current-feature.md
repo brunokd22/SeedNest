@@ -1,24 +1,25 @@
 # Current Feature
 
-## Feature: 2.9 — Backend + Web: Manager Dashboard Overview
+## Feature: 3.1 — Backend: Stripe Checkout & Webhook
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- Backend: `GET /api/dashboard/stats` — all queries in parallel via Promise.all; low-stock filtered per-nursery threshold in JS; registered in app.ts
-- Frontend: `useDashboard.ts` hook (staleTime 30s, refetchInterval 60s)
-- `StatCard.tsx` — icon circle + title + value (skeleton while loading) + description
-- `/dashboard/page.tsx` — time-based greeting, 4 stat cards, Recent Orders table, Low Stock list, no-nurseries welcome card
+- `config/stripe.ts` — Stripe client with apiVersion `2024-12-18.acacia`
+- `services/checkout.service.ts` — `createPaymentIntent` (validate seedlings → total → PaymentIntent) + `fulfillOrder` (idempotent: retrieve PI → Prisma transaction: Order + OrderItems + quantity decrements → CareReminder → receipt email → low-stock check)
+- `routes/checkout.ts` — POST `/api/checkout/create-payment-intent` (auth + CUSTOMER) + POST `/api/webhooks/stripe` (raw body, signature verify, fire-and-forget fulfillOrder)
+- `app.ts` — webhook route registered BEFORE `express.json()` (CRITICAL for Stripe signature verification)
+- Add `sendOrderReceiptEmail` to `config/resend.ts`
 
 ## Notes
 
-- Low stock Prisma query uses `quantity: { lte: 20 }` then JS-filters against per-nursery threshold
-- Recent orders include nursery name + customer name (nullable → guestName → "Walk-in")
-- `IssueStatus.OPEN / IN_PROGRESS` enum values used for open issues count
-- No `any` types; `UserRole.MANAGER` from shared
+- Webhook must use `express.raw({ type: 'application/json' })` not `express.json()`
+- `fulfillOrder` is idempotent: checks for existing Order by stripePaymentIntentId first
+- UGX uses 1:1 smallest-unit ratio (no multiplication by 100)
+- CareReminder scheduledAt = now + nursery.careReminderDays days
 
 ## History
 
