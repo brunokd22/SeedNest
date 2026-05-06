@@ -13,6 +13,7 @@ import dashboardRouter from './routes/dashboard';
 import { checkoutRouter, stripeWebhookRouter } from './routes/checkout';
 import orderRoutes from './routes/order';
 import issueRoutes from './routes/issue';
+import notificationRoutes from './routes/notification';
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use('/api/dashboard', dashboardRouter);
 app.use('/api/checkout', checkoutRouter);
 app.use(orderRoutes);
 app.use(issueRoutes);
+app.use(notificationRoutes);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
