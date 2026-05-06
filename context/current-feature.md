@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -23,6 +23,7 @@ In Progress
 
 ## History
 
+- **3.4 — Web: Cart & Checkout Pages** ✅ — cart-store (fulfillmentType + setFulfillmentType). useCheckout (useCreatePaymentIntent mutation, useOrderByPaymentIntent query with retry). cart/page (group by nurseryId, multi-nursery warning, qty stepper, remove, fulfillment selector, sticky summary). checkout/page (redirect if empty, delivery address + Use My Location Nominatim geocode, Stripe Elements + PaymentElement). order-confirmation/page (CSS keyframe success animation, items list, clearCart on load). Zero TS errors.
 - **3.3 — Backend: Walk-in Sales & Order Management API** ✅ — order.service.ts (5 functions incl. paginated filter query + ORDER_UPDATE notification). routes/order.ts (4 manager + 2 customer + /api/users/search + /api/orders/by-payment-intent/:id). app.use(orderRoutes) after express.json(). Uses Order.items relation. Zero TS errors.
 - **3.2 — Backend: Order Receipt Email & Notification Emails** ✅ — order-receipt.tsx React Email template (header, items table alternating rows, bold total, fulfillment block, CTA, care reminder note, footer). sendOrderReceiptEmail replaced with React Email render + receiptEmailSent DB update (errors logged, never throws). sendIssueNotificationEmail, sendIssueReplyEmail, sendCareReminderEmail added (inline HTML, all try/catch). Zero TS errors.
 - **3.1 — Backend: Stripe Checkout & Webhook** ✅ — stripe.ts config. checkout.service.ts (createPaymentIntent validates seedlings/stock/nursery, Stripe PI in UGX; fulfillOrder idempotent: retrieves PI → Prisma tx Order+OrderItems+quantity decrements → CareReminder → receipt email → low-stock check). routes/checkout.ts (POST /api/checkout/create-payment-intent auth+CUSTOMER; POST /api/webhooks/stripe raw body+signature verify+fire-and-forget). Webhook mounted BEFORE express.json(). sendOrderReceiptEmail added to resend.ts. Zero TS errors.
