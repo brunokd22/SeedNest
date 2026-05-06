@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -24,6 +24,7 @@ In Progress
 
 ## History
 
+- **3.7 — Mobile: Cart & Checkout Screens** ✅ — Mobile cart-store (fulfillmentType + setFulfillmentType). cart/index (Swipeable swipe-to-delete, qty stepper, fulfillment cards, sticky bar). checkout.tsx modal (PaymentSheet init+present, delivery address + Use My Location). order-confirmation (Reanimated withSpring checkmark). orders/index (FlatList + RefreshControl). orders/[orderId] (horizontal timeline, items, total, raise issue ≤30 days). Zero TS errors.
 - **3.6 — Web: Manager Orders Pages** ✅ — useManagerOrders (list+single+update status+create walkin). Orders list page (URL-state filters, Table with inline status Select per row calling PATCH, Showing X-Y of Z pagination). Walk-in wizard (3 steps: nursery, debounced customer search, seedling typeahead + cart + running total). Order detail (status Select updater, customer info, items table, Stripe PI info). Zero TS errors.
 - **3.5 — Web: Customer Order History** ✅ — useMyOrders (paginated+filtered) + useMyOrder. my-orders list page (pill tab strip, vertical OrderCard with badges, pagination, skeleton/error/empty states). Order detail page (breadcrumb, horizontal status timeline with completed/current/future styles, items table with photos, total section, fulfillment block, Raise Issue ≤30 days). Zero TS errors.
 - **3.4 — Web: Cart & Checkout Pages** ✅ — cart-store (fulfillmentType + setFulfillmentType). useCheckout (useCreatePaymentIntent mutation, useOrderByPaymentIntent query with retry). cart/page (group by nurseryId, multi-nursery warning, qty stepper, remove, fulfillment selector, sticky summary). checkout/page (redirect if empty, delivery address + Use My Location Nominatim geocode, Stripe Elements + PaymentElement). order-confirmation/page (CSS keyframe success animation, items list, clearCart on load). Zero TS errors.
