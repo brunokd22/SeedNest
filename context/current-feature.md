@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -21,6 +21,7 @@ In Progress
 
 ## History
 
+- **3.3 — Backend: Walk-in Sales & Order Management API** ✅ — order.service.ts (5 functions incl. paginated filter query + ORDER_UPDATE notification). routes/order.ts (4 manager + 2 customer + /api/users/search + /api/orders/by-payment-intent/:id). app.use(orderRoutes) after express.json(). Uses Order.items relation. Zero TS errors.
 - **3.2 — Backend: Order Receipt Email & Notification Emails** ✅ — order-receipt.tsx React Email template (header, items table alternating rows, bold total, fulfillment block, CTA, care reminder note, footer). sendOrderReceiptEmail replaced with React Email render + receiptEmailSent DB update (errors logged, never throws). sendIssueNotificationEmail, sendIssueReplyEmail, sendCareReminderEmail added (inline HTML, all try/catch). Zero TS errors.
 - **3.1 — Backend: Stripe Checkout & Webhook** ✅ — stripe.ts config. checkout.service.ts (createPaymentIntent validates seedlings/stock/nursery, Stripe PI in UGX; fulfillOrder idempotent: retrieves PI → Prisma tx Order+OrderItems+quantity decrements → CareReminder → receipt email → low-stock check). routes/checkout.ts (POST /api/checkout/create-payment-intent auth+CUSTOMER; POST /api/webhooks/stripe raw body+signature verify+fire-and-forget). Webhook mounted BEFORE express.json(). sendOrderReceiptEmail added to resend.ts. Zero TS errors.
 - **2.9 — Dashboard Overview** ✅ — GET /api/dashboard/stats (Promise.all: seedling count, monthly revenue, open issues, last 5 orders, low-stock filtered per-nursery threshold). useDashboard.ts (staleTime 30s, refetchInterval 60s). StatCard.tsx. /dashboard page (greeting, 4 stat cards, Recent Orders table, Low Stock list, no-nurseries welcome). Zero TS errors.
