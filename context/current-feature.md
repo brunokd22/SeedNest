@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -22,6 +22,7 @@ In Progress
 
 ## History
 
+- **4.1 — Backend: Issue Tracker API** ✅ — issue.service.ts (7 functions incl. paginated filter queries + cross-party notifications). routes/issue.ts (5 customer + 4 manager routes, Zod validation). app.use(issueRoutes) after express.json(). All notifications fire-and-forget in try/catch. Zero TS errors.
 - **3.8 — Mobile: Manager Order Screens** ✅ — Account tab role-aware (Manager Tools section with ClipboardList+ShoppingBag nav, notifications AsyncStorage toggle). manager/orders (filter chips, FlatList + pull-to-refresh, status/method badges). manager/orders/[orderId] (custom Modal ActionSheet for PATCH status, customer info, items, fulfillment). manager/walkin-sale (4-step wizard: nursery FlatList, debounced customer search, seedling typeahead + cart + running total, review + submit). Zero TS errors.
 - **3.7 — Mobile: Cart & Checkout Screens** ✅ — Mobile cart-store (fulfillmentType + setFulfillmentType). cart/index (Swipeable swipe-to-delete, qty stepper, fulfillment cards, sticky bar). checkout.tsx modal (PaymentSheet init+present, delivery address + Use My Location). order-confirmation (Reanimated withSpring checkmark). orders/index (FlatList + RefreshControl). orders/[orderId] (horizontal timeline, items, total, raise issue ≤30 days). Zero TS errors.
 - **3.6 — Web: Manager Orders Pages** ✅ — useManagerOrders (list+single+update status+create walkin). Orders list page (URL-state filters, Table with inline status Select per row calling PATCH, Showing X-Y of Z pagination). Walk-in wizard (3 steps: nursery, debounced customer search, seedling typeahead + cart + running total). Order detail (status Select updater, customer info, items table, Stripe PI info). Zero TS errors.
