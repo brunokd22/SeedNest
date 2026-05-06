@@ -1,23 +1,24 @@
 # Current Feature
 
-## Feature: 3.5 — Web: Customer Order History Pages
+## Feature: 3.6 — Web: Manager Orders Pages
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `useOrders.ts`: useMyOrders (paginated + status filter) + useMyOrder (single order)
-- `my-orders/page.tsx`: filter tabs (All/Pending/Processing/Dispatched/Delivered/Collected), vertical order cards, pagination
-- `my-orders/[orderId]/page.tsx`: breadcrumb, horizontal status timeline (DELIVERY vs PICKUP steps), items table, total, fulfillment block, raise issue button (≤30 days)
+- `useManagerOrders.ts`: useManagerOrders, useManagerOrder, useUpdateFulfillmentStatus (PATCH), useCreateWalkinOrder (POST)
+- `orders/page.tsx`: URL-state filters (nursery, dateFrom, dateTo, status, method), Table with inline status updater, pagination "Showing X–Y of Z"
+- `orders/new/page.tsx`: 3-step wizard (1=nursery, 2=customer, 3=items+review), debounced customer search, seedling typeahead, running total
+- `orders/[orderId]/page.tsx`: status Select updater, customer info, items table, Stripe PI info
 
 ## Notes
 
-- Order cards use vertical layout (not table) for mobile readability
-- Status timeline steps differ by fulfillmentType: DELIVERY=4 steps, PICKUP=4 steps
-- "Raise Issue" button only shown if order.createdAt within 30 days
-- Items table includes photo thumbnail from seedling.photos[0]
+- URL filters use useSearchParams + router.push; filter changes reset to page 1
+- Inline status Select per table row calls PATCH mutation directly
+- Customer search debounced 300ms, min 3 chars, uses /api/users/search?email=
+- Seedling typeahead uses /api/nurseries/:nurseryId/seedlings?search=&pageSize=10
 
 ## History
 
