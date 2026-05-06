@@ -1,25 +1,24 @@
 # Current Feature
 
-## Feature: 3.8 — Mobile: Manager Order Screens
+## Feature: 4.1 — Backend: Issue Tracker API
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- Account tab: role-aware (Manager Tools section for MANAGER), notifications AsyncStorage toggle, sign-out
-- `manager/orders.tsx`: filter chips (All/Online/Walk-in/Pending/Processing), FlatList with pull-to-refresh
-- `manager/orders/[orderId].tsx`: status updater via custom Modal ActionSheet, customer info, items, total
-- `manager/walkin-sale.tsx`: 4-step wizard (nursery FlatList, customer search, seedling typeahead + cart, review + submit)
-- Register 3 new Stack screens in _layout.tsx
+- `issue.service.ts`: 7 methods — createIssue (notify manager), getIssuesByCustomer, getIssuesByManager, getIssueById (ownership check), addComment (notify other party), updateIssueStatus (notify customer on RESOLVED/CLOSED), reopenIssue (notify manager)
+- `routes/issue.ts`: 5 customer routes + 4 manager routes, Zod validation
+- Register `app.use(issueRoutes)` after express.json()
 
 ## Notes
 
-- expo-action-sheet not installed — use custom Modal for status ActionSheet
-- AsyncStorage for notifications toggle (key: notificationsEnabled)
-- Seedling search: GET /api/nurseries/:nurseryId/seedlings?search=&pageSize=10
-- UserRole.MANAGER from @seednest/shared for role comparisons
+- IssueStatus / IssueType from @seednest/shared (not @prisma/client)
+- sendIssueNotificationEmail + sendIssueReplyEmail from config/resend.ts
+- createNotification from services/notification.service.ts
+- addComment uses ownership check then notifies the "other party" (customer→manager or manager→customer)
+- All post-create notifications wrapped in try/catch to never break core flow
 
 ## History
 
