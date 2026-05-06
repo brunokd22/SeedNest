@@ -1,24 +1,24 @@
 # Current Feature
 
-## Feature: 4.1 — Backend: Issue Tracker API
+## Feature: 4.2 — Backend: Notifications API
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `issue.service.ts`: 7 methods — createIssue (notify manager), getIssuesByCustomer, getIssuesByManager, getIssueById (ownership check), addComment (notify other party), updateIssueStatus (notify customer on RESOLVED/CLOSED), reopenIssue (notify manager)
-- `routes/issue.ts`: 5 customer routes + 4 manager routes, Zod validation
-- Register `app.use(issueRoutes)` after express.json()
+- `notification.service.ts`: expand with getNotifications (paginated), getUnreadCount, markAsRead (ownership check), markAllRead
+- `routes/notification.ts`: 4 routes — GET /notifications, GET /notifications/unread-count (BEFORE /:id), PATCH /notifications/mark-all-read (BEFORE /:id), PATCH /notifications/:id/read
+- Register notificationRoutes in app.ts
+- Verify no inline prisma.notification.create calls exist outside notification.service.ts (already clean from 4.1)
 
 ## Notes
 
-- IssueStatus / IssueType from @seednest/shared (not @prisma/client)
-- sendIssueNotificationEmail + sendIssueReplyEmail from config/resend.ts
-- createNotification from services/notification.service.ts
-- addComment uses ownership check then notifies the "other party" (customer→manager or manager→customer)
-- All post-create notifications wrapped in try/catch to never break core flow
+- Route ordering is critical: literal paths before /:id param to prevent express matching "unread-count" as id
+- Both roles (MANAGER + CUSTOMER) can access notifications — requireAuth only, no requireRole
+- All new methods use $transaction where both data + count queries run together
+- No refactoring needed — all services already use createNotification() from 4.1 implementation
 
 ## History
 
