@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -23,6 +23,7 @@ In Progress
 
 ## History
 
+- **3.1 — Backend: Stripe Checkout & Webhook** ✅ — stripe.ts config. checkout.service.ts (createPaymentIntent validates seedlings/stock/nursery, Stripe PI in UGX; fulfillOrder idempotent: retrieves PI → Prisma tx Order+OrderItems+quantity decrements → CareReminder → receipt email → low-stock check). routes/checkout.ts (POST /api/checkout/create-payment-intent auth+CUSTOMER; POST /api/webhooks/stripe raw body+signature verify+fire-and-forget). Webhook mounted BEFORE express.json(). sendOrderReceiptEmail added to resend.ts. Zero TS errors.
 - **2.9 — Dashboard Overview** ✅ — GET /api/dashboard/stats (Promise.all: seedling count, monthly revenue, open issues, last 5 orders, low-stock filtered per-nursery threshold). useDashboard.ts (staleTime 30s, refetchInterval 60s). StatCard.tsx. /dashboard page (greeting, 4 stat cards, Recent Orders table, Low Stock list, no-nurseries welcome). Zero TS errors.
 - **2.8 — Mobile: Customer Explore Screens** ✅ — Mobile useExplore.ts (4 hooks), cart-store.ts (Zustand + AsyncStorage persist). NurseryCard + SeedlingCard (RN components with expo-image, StyleSheet shadows). explore/index.tsx (MapView + list toggle, auto location on mount, bottom horizontal scroll, callouts). explore/[nurseryId].tsx (cover header, category chips, 2-col FlatList). Seedling detail (paginated photo carousel with dots, quantity stepper, sticky bottom cart bar). Zero TS errors.
 - **2.7 — Web: Customer Explore & Nursery Discovery** ✅ — useExplore.ts (4 public hooks). NurseryCard (cover/gradient, distance badge). SeedlingCard (photo/gradient, availability badge, Add to Cart). explore/page.tsx (LocationButton state machine). explore/[nurseryId]/page.tsx (hero overlay, category pill tabs, ToggleGroup, debounced search, Slider, Switch). Seedling detail (photo gallery, qty selector, Add/Update Cart). Zero TS errors.
