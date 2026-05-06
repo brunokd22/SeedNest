@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -21,6 +21,7 @@ In Progress
 
 ## History
 
+- **3.5 — Web: Customer Order History** ✅ — useMyOrders (paginated+filtered) + useMyOrder. my-orders list page (pill tab strip, vertical OrderCard with badges, pagination, skeleton/error/empty states). Order detail page (breadcrumb, horizontal status timeline with completed/current/future styles, items table with photos, total section, fulfillment block, Raise Issue ≤30 days). Zero TS errors.
 - **3.4 — Web: Cart & Checkout Pages** ✅ — cart-store (fulfillmentType + setFulfillmentType). useCheckout (useCreatePaymentIntent mutation, useOrderByPaymentIntent query with retry). cart/page (group by nurseryId, multi-nursery warning, qty stepper, remove, fulfillment selector, sticky summary). checkout/page (redirect if empty, delivery address + Use My Location Nominatim geocode, Stripe Elements + PaymentElement). order-confirmation/page (CSS keyframe success animation, items list, clearCart on load). Zero TS errors.
 - **3.3 — Backend: Walk-in Sales & Order Management API** ✅ — order.service.ts (5 functions incl. paginated filter query + ORDER_UPDATE notification). routes/order.ts (4 manager + 2 customer + /api/users/search + /api/orders/by-payment-intent/:id). app.use(orderRoutes) after express.json(). Uses Order.items relation. Zero TS errors.
 - **3.2 — Backend: Order Receipt Email & Notification Emails** ✅ — order-receipt.tsx React Email template (header, items table alternating rows, bold total, fulfillment block, CTA, care reminder note, footer). sendOrderReceiptEmail replaced with React Email render + receiptEmailSent DB update (errors logged, never throws). sendIssueNotificationEmail, sendIssueReplyEmail, sendCareReminderEmail added (inline HTML, all try/catch). Zero TS errors.
