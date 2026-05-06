@@ -1,24 +1,26 @@
 # Current Feature
 
-## Feature: 3.6 — Web: Manager Orders Pages
+## Feature: 3.7 — Mobile: Cart & Checkout Screens
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `useManagerOrders.ts`: useManagerOrders, useManagerOrder, useUpdateFulfillmentStatus (PATCH), useCreateWalkinOrder (POST)
-- `orders/page.tsx`: URL-state filters (nursery, dateFrom, dateTo, status, method), Table with inline status updater, pagination "Showing X–Y of Z"
-- `orders/new/page.tsx`: 3-step wizard (1=nursery, 2=customer, 3=items+review), debounced customer search, seedling typeahead, running total
-- `orders/[orderId]/page.tsx`: status Select updater, customer info, items table, Stripe PI info
+- `_layout.tsx`: add `checkout` modal Stack.Screen (StripeProvider already present)
+- `cart/index.tsx`: Swipeable swipe-to-delete, qty stepper, fulfillment cards, sticky checkout bar
+- `checkout.tsx`: modal — PaymentSheet (initPaymentSheet + presentPaymentSheet), address + Use My Location, summary
+- `order-confirmation.tsx`: Reanimated spring checkmark animation, order summary, CTA buttons
+- `orders/index.tsx`: FlatList with pull-to-refresh, order cards with status badge
+- `orders/[orderId].tsx`: horizontal status timeline, items list, total, raise issue button ≤30 days
 
 ## Notes
 
-- URL filters use useSearchParams + router.push; filter changes reset to page 1
-- Inline status Select per table row calls PATCH mutation directly
-- Customer search debounced 300ms, min 3 chars, uses /api/users/search?email=
-- Seedling typeahead uses /api/nurseries/:nurseryId/seedlings?search=&pageSize=10
+- StripeProvider already in _layout.tsx — just add Stack.Screen for checkout modal
+- Swipeable from react-native-gesture-handler for swipe-to-delete on cart items
+- checkout.tsx uses native fetch with Bearer token (api instance doesn't pass token for payment create)
+- Reanimated withSpring + withTiming for success animation
 
 ## History
 
