@@ -14,6 +14,7 @@ import { checkoutRouter, stripeWebhookRouter } from './routes/checkout';
 import orderRoutes from './routes/order';
 import issueRoutes from './routes/issue';
 import notificationRoutes from './routes/notification';
+import reportRoutes from './routes/report';
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use('/api/checkout', checkoutRouter);
 app.use(orderRoutes);
 app.use(issueRoutes);
 app.use(notificationRoutes);
+app.use(reportRoutes);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
