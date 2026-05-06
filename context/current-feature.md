@@ -1,25 +1,23 @@
 # Current Feature
 
-## Feature: 3.4 — Web: Cart & Checkout Pages
+## Feature: 3.5 — Web: Customer Order History Pages
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `useCheckout.ts`: useCreatePaymentIntent (POST /api/checkout/create-payment-intent) + useOrderByPaymentIntent (GET /api/orders/by-payment-intent/:id)
-- `cart-store.ts`: add fulfillmentType + setFulfillmentType
-- `cart/page.tsx`: group by nurseryId, multi-nursery warning, qty stepper, remove, fulfillment selector, order summary
-- `checkout/page.tsx`: redirect if empty, delivery address + geolocation reverse-geocode, Stripe Elements + PaymentElement, clearCart on confirmation
-- `order-confirmation/page.tsx`: read payment_intent param, fetch order, success animation
+- `useOrders.ts`: useMyOrders (paginated + status filter) + useMyOrder (single order)
+- `my-orders/page.tsx`: filter tabs (All/Pending/Processing/Dispatched/Delivered/Collected), vertical order cards, pagination
+- `my-orders/[orderId]/page.tsx`: breadcrumb, horizontal status timeline (DELIVERY vs PICKUP steps), items table, total, fulfillment block, raise issue button (≤30 days)
 
 ## Notes
 
-- Install @stripe/stripe-js + @stripe/react-stripe-js in web
-- NurseryGroup component calls usePublicNursery per group for name lookup (avoids adding nurseryName to CartItem)
-- useEffect + ref guard for createPaymentIntent on mount (prevents StrictMode double-fire)
-- cartStore.clearCart() called on order-confirmation page after order loads
+- Order cards use vertical layout (not table) for mobile readability
+- Status timeline steps differ by fulfillmentType: DELIVERY=4 steps, PICKUP=4 steps
+- "Raise Issue" button only shown if order.createdAt within 30 days
+- Items table includes photo thumbnail from seedling.photos[0]
 
 ## History
 
