@@ -68,9 +68,6 @@ importers:
       '@types/nodemailer':
         specifier: ^6.4.17
         version: 6.4.23
-      '@types/pdfkit':
-        specifier: ^0.13.9
-        version: 0.13.9
       bcryptjs:
         specifier: ^3.0.2
         version: 3.0.3
@@ -80,6 +77,9 @@ importers:
       cors:
         specifier: ^2.8.5
         version: 2.8.6
+      date-fns:
+        specifier: ^3.6.0
+        version: 3.6.0
       dotenv:
         specifier: ^16.5.0
         version: 16.6.1
@@ -129,6 +129,9 @@ importers:
       '@seednest/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
+      '@types/pdfkit':
+        specifier: ^0.13.9
+        version: 0.13.9
       '@types/react':
         specifier: ^19.2.14
         version: 19.2.14
