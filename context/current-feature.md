@@ -1,25 +1,23 @@
 # Current Feature
 
-## Feature: 3.2 — Backend: Order Receipt Email & Notification Emails
+## Feature: 3.3 — Backend: Walk-in Sales & Order Management API
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `emails/order-receipt.tsx` — React Email template (header, items table, fulfillment block, CTA, care reminder note, footer)
-- Replace inline-HTML `sendOrderReceiptEmail` in `config/resend.ts` with React Email render + `receiptEmailSent` DB update
-- `sendIssueNotificationEmail` — notifies manager of new issue
-- `sendIssueReplyEmail` — notifies customer of manager reply
-- `sendCareReminderEmail` — sends care tips to customer post-purchase
+- `order.service.ts`: createWalkinOrder (Prisma tx: Order+OrderItems+quantity decrements, saleMethod WALKIN, fulfillmentStatus COLLECTED), getOrdersByManager (paginated+filtered), getOrderById (ownership check for both roles), updateFulfillmentStatus (customer notification), getOrdersByCustomer (paginated)
+- `routes/order.ts`: 4 manager routes + 2 customer routes + /api/users/search + /api/orders/by-payment-intent/:id
+- `app.ts`: `app.use(orderRoutes)` after express.json()
 
 ## Notes
 
-- OrderItem has snapshot fields (seedlingName, seedlingSize, unitPrice) — no seedling join needed
-- All email functions wrap send in try/catch and never throw — receipt failure must not break order fulfillment
-- `FRONTEND_URL` used for order CTA link: `${process.env.FRONTEND_URL}/my-orders/${orderId}`
-- Simple inline HTML for the 3 notification functions (no React Email)
+- `/api/orders` routes use no base-path prefix — `app.use(orderRoutes)` registers them at root
+- Walk-in orders always: fulfillmentType=PICKUP, fulfillmentStatus=COLLECTED, saleMethod=WALKIN
+- `by-payment-intent` route comes BEFORE `/:id` in router to avoid param collision
+- Zod v4 uses `.issues[0]?.message` not `.errors[0]?.message`
 
 ## History
 
