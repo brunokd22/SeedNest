@@ -1,26 +1,25 @@
 # Current Feature
 
-## Feature: 3.7 — Mobile: Cart & Checkout Screens
+## Feature: 3.8 — Mobile: Manager Order Screens
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
-- `_layout.tsx`: add `checkout` modal Stack.Screen (StripeProvider already present)
-- `cart/index.tsx`: Swipeable swipe-to-delete, qty stepper, fulfillment cards, sticky checkout bar
-- `checkout.tsx`: modal — PaymentSheet (initPaymentSheet + presentPaymentSheet), address + Use My Location, summary
-- `order-confirmation.tsx`: Reanimated spring checkmark animation, order summary, CTA buttons
-- `orders/index.tsx`: FlatList with pull-to-refresh, order cards with status badge
-- `orders/[orderId].tsx`: horizontal status timeline, items list, total, raise issue button ≤30 days
+- Account tab: role-aware (Manager Tools section for MANAGER), notifications AsyncStorage toggle, sign-out
+- `manager/orders.tsx`: filter chips (All/Online/Walk-in/Pending/Processing), FlatList with pull-to-refresh
+- `manager/orders/[orderId].tsx`: status updater via custom Modal ActionSheet, customer info, items, total
+- `manager/walkin-sale.tsx`: 4-step wizard (nursery FlatList, customer search, seedling typeahead + cart, review + submit)
+- Register 3 new Stack screens in _layout.tsx
 
 ## Notes
 
-- StripeProvider already in _layout.tsx — just add Stack.Screen for checkout modal
-- Swipeable from react-native-gesture-handler for swipe-to-delete on cart items
-- checkout.tsx uses native fetch with Bearer token (api instance doesn't pass token for payment create)
-- Reanimated withSpring + withTiming for success animation
+- expo-action-sheet not installed — use custom Modal for status ActionSheet
+- AsyncStorage for notifications toggle (key: notificationsEnabled)
+- Seedling search: GET /api/nurseries/:nurseryId/seedlings?search=&pageSize=10
+- UserRole.MANAGER from @seednest/shared for role comparisons
 
 ## History
 

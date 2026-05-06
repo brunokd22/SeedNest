@@ -13,6 +13,9 @@ export default function RootLayout() {
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="checkout" options={{ presentation: 'modal', headerShown: true, title: 'Checkout' }} />
             <Stack.Screen name="order-confirmation" options={{ headerShown: false }} />
+            <Stack.Screen name="manager/orders" options={{ headerShown: true, title: 'Orders' }} />
+            <Stack.Screen name="manager/orders/[orderId]" options={{ headerShown: true, title: 'Order Detail' }} />
+            <Stack.Screen name="manager/walkin-sale" options={{ headerShown: true, title: 'Walk-in Sale' }} />
           </Stack>
         </AuthProvider>
       </StripeProvider>
