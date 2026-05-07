@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -22,6 +22,7 @@ In Progress
 
 ## History
 
+- **4.3 — Backend: Sales Reports & Exports API** ✅ — report.service.ts (getSalesAnalytics with parallel Promise.all: aggregate summary, groupBy nursery/fulfillment/saleMethod, $queryRaw for revenue-by-day and top-10-seedlings). exportToExcel (4 ExcelJS sheets with green headers + alternating rows). exportToPDF (PDFKit cover page, 2-col stats, tables with row overflow pagination). Routes at /api/reports/analytics + /export/excel + /export/pdf. Installed exceljs/pdfkit/date-fns. Zero TS errors.
 - **4.2 — Backend: Notifications API** ✅ — notification.service.ts expanded (getNotifications paginated, getUnreadCount, markAsRead ownership check, markAllRead). routes/notification.ts with correct ordering (literal paths before /:id). app.use(notificationRoutes). No refactoring needed — all services already used createNotification() from 4.1. Zero TS errors.
 - **4.1 — Backend: Issue Tracker API** ✅ — issue.service.ts (7 functions incl. paginated filter queries + cross-party notifications). routes/issue.ts (5 customer + 4 manager routes, Zod validation). app.use(issueRoutes) after express.json(). All notifications fire-and-forget in try/catch. Zero TS errors.
 - **3.8 — Mobile: Manager Order Screens** ✅ — Account tab role-aware (Manager Tools section with ClipboardList+ShoppingBag nav, notifications AsyncStorage toggle). manager/orders (filter chips, FlatList + pull-to-refresh, status/method badges). manager/orders/[orderId] (custom Modal ActionSheet for PATCH status, customer info, items, fulfillment). manager/walkin-sale (4-step wizard: nursery FlatList, debounced customer search, seedling typeahead + cart + running total, review + submit). Zero TS errors.
