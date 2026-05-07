@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -22,6 +22,7 @@ In Progress
 
 ## History
 
+- **4.7 — Web: Sales Analytics & Reports Page** ✅ — useAnalytics (staleTime, enabled guard). Reports page: sticky preset filters (Week/Month/LastMonth/Custom + nursery), 4 stat cards (TrendingUp/ShoppingBag/Calculator/Building2), recharts AreaChart (revenue trend + gradient), horizontal BarChart (nursery revenue), PieChart donut (fulfillment + center order count), top-10 seedlings table (🏆 rank 1), Excel+PDF export with Loader2. Zero TS errors.
 - **4.6 — Web: Notifications UI (Manager)** ✅ — useNotifications (useUnreadCount polls 30s, useNotifications paginated, useMarkAsRead, useMarkAllRead). NotificationBell (Popover, last 5 with type icons, unread=white/read=gray-50, red count badge 99+ cap, click marks+navigates, mark all read, footer link). Notifications page (client-side filter tabs, full-width rows with unread blue dot, pagination). ManagerSidebar: red dot on Notifications item. ManagerShell: real NotificationBell replacing stub. Zero TS errors.
 - **4.5 — Web: Manager Issues Pages** ✅ — useManagerIssues (4 hooks). Issues list (stats bar Open/InProgress/Resolved, URL-state filters, Table 10 cols, OPEN rows with orange left border, row-click nav). Issue detail (2-col: left=description+chat thread manager-right/green customer-left/blue+optimistic comments+reply form; right=status card+issue details card+customer info card). Zero TS errors.
 - **4.4 — Web: Customer Issues Pages** ✅ — useIssues (5 hooks). my-issues list (pill tabs, IssueCard with type icon+color badge, status badge, comment count, relative timestamp). new issue form (react-hook-form+Zod, 4 type radio cards, order Select auto-sets nurseryId, seedling Select conditional on order, pre-populated from query params). Issue detail (chat-style thread: customer right/blue, manager left/green, optimistic comments, Reopen button, closed banner+disabled reply). Zero TS errors.
