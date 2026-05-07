@@ -10,7 +10,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ChevronRight, ClipboardList, ShoppingBag } from 'lucide-react-native';
+import { Bell, ChevronRight, ClipboardList, ShoppingBag } from 'lucide-react-native';
 import { useAuthStore } from '@/store/auth-store';
 import { clearToken } from '@/lib/auth';
 import { UserRole } from '@seednest/shared';
@@ -111,8 +111,22 @@ export default function AccountScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>Settings</Text>
           <View style={styles.listCard}>
+            <TouchableOpacity
+              style={styles.listRow}
+              onPress={() => router.push('/(tabs)/account/notifications' as never)}
+              activeOpacity={0.7}
+            >
+              <View style={styles.listRowLeft}>
+                <Bell size={20} color={PRIMARY} />
+                <Text style={styles.listRowText}>Notifications</Text>
+              </View>
+              <ChevronRight size={18} color="#9CA3AF" />
+            </TouchableOpacity>
+
+            <View style={styles.rowDivider} />
+
             <View style={[styles.listRow, { justifyContent: 'space-between' }]}>
-              <Text style={styles.listRowText}>Notifications</Text>
+              <Text style={styles.listRowText}>Push Notifications</Text>
               <Switch
                 value={notificationsEnabled}
                 onValueChange={toggleNotifications}

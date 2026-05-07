@@ -1,10 +1,16 @@
+import { View } from 'react-native';
 import { Tabs } from 'expo-router';
-import { MapPin, MessageCircle, Package, ShoppingCart, User } from 'lucide-react-native';
+import { MapPin, MessageSquare, Package, ShoppingCart, User } from 'lucide-react-native';
+import { NotificationBadge } from '@/components/NotificationBadge';
+import { useUnreadCount } from '@/lib/hooks/useNotifications';
 
 const ACTIVE = '#2D6A4F';
 const INACTIVE = '#9CA3AF';
 
 export default function TabLayout() {
+  const { data } = useUnreadCount();
+  const unreadCount = data?.count ?? 0;
+
   return (
     <Tabs
       screenOptions={{
@@ -39,7 +45,12 @@ export default function TabLayout() {
         name="issues"
         options={{
           title: 'Issues',
-          tabBarIcon: ({ color, size }) => <MessageCircle color={color} size={size} />,
+          tabBarIcon: ({ color, size }) => (
+            <View>
+              <MessageSquare color={color} size={size} />
+              <NotificationBadge count={unreadCount} />
+            </View>
+          ),
         }}
       />
       <Tabs.Screen
