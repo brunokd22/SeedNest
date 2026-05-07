@@ -1,27 +1,14 @@
 # Current Feature
 
-## Feature: 4.7 — Web: Sales Analytics & Reports Page
+## Feature: 4.8 — Mobile: Issues & Notifications Screens
 
 ## Status
 
-Completed
-
-## Goals
-
-- `notification.service.ts`: expand with getNotifications (paginated), getUnreadCount, markAsRead (ownership check), markAllRead
-- `routes/notification.ts`: 4 routes — GET /notifications, GET /notifications/unread-count (BEFORE /:id), PATCH /notifications/mark-all-read (BEFORE /:id), PATCH /notifications/:id/read
-- Register notificationRoutes in app.ts
-- Verify no inline prisma.notification.create calls exist outside notification.service.ts (already clean from 4.1)
-
-## Notes
-
-- Route ordering is critical: literal paths before /:id param to prevent express matching "unread-count" as id
-- Both roles (MANAGER + CUSTOMER) can access notifications — requireAuth only, no requireRole
-- All new methods use $transaction where both data + count queries run together
-- No refactoring needed — all services already use createNotification() from 4.1 implementation
+Completed ✅
 
 ## History
 
+- **4.8 — Mobile: Issues & Notifications Screens** ✅ — useNotifications (useUnreadCount polls 30s, useNotifications, useMarkAsRead, useMarkAllRead). issues/index.tsx (filter chips All/Open/InProgress/Resolved/Closed, FlatList with type+status badges, nursery name, comment count, FAB, pull-to-refresh). issues/new.tsx (KeyboardAvoidingView+ScrollView, nurseries derived from my-orders, optional order link, 4 type cards with icons, title+description with char counts, submit disabled until valid, Alert on success + navigate to detail). issues/[issueId].tsx (Stack.Screen title truncated, RotateCcw reopen header button for RESOLVED, description card, inverted FlatList chat thread: customer right/blue, manager left/green, optimistic comments, closed banner + disabled reply, KeyboardAvoidingView reply bar with Send icon). NotificationBadge.tsx (red count circle, 99+ cap). _layout.tsx updated: MessageSquare icon with NotificationBadge overlay polling unreadCount. account/notifications.tsx (Stack.Screen with Mark All Read header button, FlatList with Swipeable swipe-right mark-as-read, type icon circles, unread left blue border, tap navigates to issue/order, empty state). account/index.tsx: Notifications row linking to notifications screen. Zero TS errors.
 - **4.7 — Web: Sales Analytics & Reports Page** ✅ — useAnalytics (staleTime, enabled guard). Reports page: sticky preset filters (Week/Month/LastMonth/Custom + nursery), 4 stat cards (TrendingUp/ShoppingBag/Calculator/Building2), recharts AreaChart (revenue trend + gradient), horizontal BarChart (nursery revenue), PieChart donut (fulfillment + center order count), top-10 seedlings table (🏆 rank 1), Excel+PDF export with Loader2. Zero TS errors.
 - **4.6 — Web: Notifications UI (Manager)** ✅ — useNotifications (useUnreadCount polls 30s, useNotifications paginated, useMarkAsRead, useMarkAllRead). NotificationBell (Popover, last 5 with type icons, unread=white/read=gray-50, red count badge 99+ cap, click marks+navigates, mark all read, footer link). Notifications page (client-side filter tabs, full-width rows with unread blue dot, pagination). ManagerSidebar: red dot on Notifications item. ManagerShell: real NotificationBell replacing stub. Zero TS errors.
 - **4.5 — Web: Manager Issues Pages** ✅ — useManagerIssues (4 hooks). Issues list (stats bar Open/InProgress/Resolved, URL-state filters, Table 10 cols, OPEN rows with orange left border, row-click nav). Issue detail (2-col: left=description+chat thread manager-right/green customer-left/blue+optimistic comments+reply form; right=status card+issue details card+customer info card). Zero TS errors.
