@@ -1,10 +1,10 @@
 # Current Feature
 
-## Feature: 4.6 — Web: Notifications UI (Manager)
+## Feature: 4.7 — Web: Sales Analytics & Reports Page
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 
