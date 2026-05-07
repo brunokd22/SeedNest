@@ -4,7 +4,7 @@
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -22,6 +22,7 @@ In Progress
 
 ## History
 
+- **4.6 — Web: Notifications UI (Manager)** ✅ — useNotifications (useUnreadCount polls 30s, useNotifications paginated, useMarkAsRead, useMarkAllRead). NotificationBell (Popover, last 5 with type icons, unread=white/read=gray-50, red count badge 99+ cap, click marks+navigates, mark all read, footer link). Notifications page (client-side filter tabs, full-width rows with unread blue dot, pagination). ManagerSidebar: red dot on Notifications item. ManagerShell: real NotificationBell replacing stub. Zero TS errors.
 - **4.5 — Web: Manager Issues Pages** ✅ — useManagerIssues (4 hooks). Issues list (stats bar Open/InProgress/Resolved, URL-state filters, Table 10 cols, OPEN rows with orange left border, row-click nav). Issue detail (2-col: left=description+chat thread manager-right/green customer-left/blue+optimistic comments+reply form; right=status card+issue details card+customer info card). Zero TS errors.
 - **4.4 — Web: Customer Issues Pages** ✅ — useIssues (5 hooks). my-issues list (pill tabs, IssueCard with type icon+color badge, status badge, comment count, relative timestamp). new issue form (react-hook-form+Zod, 4 type radio cards, order Select auto-sets nurseryId, seedling Select conditional on order, pre-populated from query params). Issue detail (chat-style thread: customer right/blue, manager left/green, optimistic comments, Reopen button, closed banner+disabled reply). Zero TS errors.
 - **4.3 — Backend: Sales Reports & Exports API** ✅ — report.service.ts (getSalesAnalytics with parallel Promise.all: aggregate summary, groupBy nursery/fulfillment/saleMethod, $queryRaw for revenue-by-day and top-10-seedlings). exportToExcel (4 ExcelJS sheets with green headers + alternating rows). exportToPDF (PDFKit cover page, 2-col stats, tables with row overflow pagination). Routes at /api/reports/analytics + /export/excel + /export/pdf. Installed exceljs/pdfkit/date-fns. Zero TS errors.
