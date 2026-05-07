@@ -1,10 +1,10 @@
 # Current Feature
 
-## Feature: 4.5 — Web: Manager Issues Pages
+## Feature: 4.6 — Web: Notifications UI (Manager)
 
 ## Status
 
-Completed
+In Progress
 
 ## Goals
 

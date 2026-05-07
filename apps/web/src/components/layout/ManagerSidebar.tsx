@@ -20,6 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useUnreadCount } from '@/lib/hooks/useNotifications';
 
 const NAV_ITEMS = [
   { label: 'Overview', href: '/dashboard', icon: LayoutDashboard, exact: true },
@@ -38,6 +39,8 @@ interface ManagerSidebarProps {
 
 export function ManagerSidebar({ isCollapsed, onToggle, isMobile }: ManagerSidebarProps) {
   const pathname = usePathname();
+  const { data: unreadData } = useUnreadCount();
+  const unreadCount = unreadData?.count ?? 0;
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -89,7 +92,14 @@ export function ManagerSidebar({ isCollapsed, onToggle, isMobile }: ManagerSideb
                 )}
               >
                 <Icon className="h-5 w-5 shrink-0" />
-                {!isCollapsed && <span>{label}</span>}
+                {!isCollapsed && (
+                  <span className="flex-1 flex items-center justify-between">
+                    {label}
+                    {label === 'Notifications' && unreadCount > 0 && (
+                      <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+                    )}
+                  </span>
+                )}
               </Link>
             );
 
